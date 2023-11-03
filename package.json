@@ -1,0 +1,48 @@
+{
+  "name": "@hyperpaas/space-app-list",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.es.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hyperpaas-fe/space-app-list.git"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@hp-view/com-person-picker": "^0.2.0",
+    "@hp-view/fit-icon": "^0.1.1",
+    "@hp-view/request": "^0.2.7",
+    "@hp-view/theme": "^1.0.1",
+    "@icon-park/react": "^1.4.2",
+    "antd": "4.22.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.1",
+    "@types/react": "^18.0.19",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "less": "^4.1.3",
+    "vite": "^3.1.0",
+    "vite-plugin-mkcert": "^1.9.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js"
+    }
+  },
+  "files": [
+    "package.json",
+    "src",
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://nexus.hyperpaas-inc.com/repository/npm"
+  }
+}
