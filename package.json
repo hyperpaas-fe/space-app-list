@@ -13,11 +13,11 @@
     "url": "git@github.com:hyperpaas-fe/space-app-list.git"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.2.6",
     "@hp-view/com-person-picker": "^0.2.0",
     "@hp-view/fit-icon": "^0.1.1",
     "@hp-view/request": "^0.2.7",
     "@hp-view/theme": "^1.0.1",
+    "@hyperpaas/hyper-sdk": "^0.2.2",
     "@icon-park/react": "^1.4.2",
     "antd": "4.22.3",
     "react": "^18.2.0",

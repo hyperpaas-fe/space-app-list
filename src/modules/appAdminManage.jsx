@@ -79,7 +79,7 @@ function AppAdminManage(props) {
 
   return (
     <div
-      className="studio-developer-selecter-container"
+      className="space-developer-selecter-container"
       onClick={showPersonPicker}
     >
       {developers.length

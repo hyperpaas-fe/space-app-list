@@ -2,32 +2,73 @@
 @import "node_modules/@hp-view/com-person-picker/src/index.less";
 
 @{ROOT_ELEMENT} {
-  .applist-list-container {
+  // .applist-portal-wrapper {
+  //   width: 100%;
+  // }
+  
+  // .applist-portal-banner {
+  //   height: 94px;
+  //   background-color: #fff;
+  
+  //   > .wrapper {
+  //     max-width: 1180px;
+  //     margin: auto;
+  //     padding-top: 20px;
+  //   }
+  
+  //   .v-banner-title {
+  //     margin-bottom: 4px;
+  //     font-size: 20px;
+  //     font-weight: 700;
+  //     line-height: 30px;
+  //     color: #333;
+  //   }
+  
+  //   .v-banner-desc {
+  //     margin-bottom: 0;
+  //     font-size: 12px;
+  //     line-height: 18px;
+  //     color: #999;
+  //   }
+  // }
+  
+  .applist-portal-container {
     max-width: 1180px;
     margin: auto;
     padding-bottom: 40px;
   }
-
+  
   .applist-item {
     position: relative;
     display: flex;
-    height: 132px;
-    padding: 20px;
+    height: 110px;
+    padding: 23px 20px;
     background-color: #fff;
     border-radius: 8px;
   }
-
+  
   .applist-item-icon {
     width: 64px;
     height: 64px;
-    // border-radius: 12px;
+    flex: 0 0 64px;
     // background-color: #c7f4c2;
+  
+    .pic-box {
+      overflow: hidden;
+      height: 100%;
+      border-radius: 12px;
+  
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
   }
-
+  
   .applist-item-info {
     padding-left: 20px;
     overflow: hidden;
-
+  
     .info-appname {
       overflow: hidden;
       padding-right: 30px;
@@ -36,12 +77,15 @@
       line-height: 22px;
       white-space: nowrap;
       text-overflow: ellipsis;
-
+  
       a {
         color: #333;
+        &:hover {
+          color: @hy-color-brand1;
+        }
       }
     }
-
+  
     .info-desc {
       max-height: 40px;
       overflow: hidden;
@@ -50,47 +94,40 @@
       color: #999;
     }
   }
-
+  
   .applist-item-pin {
     position: absolute;
     bottom: 20px;
     right: 20px;
   }
-
+  
   .applist-item-dropdown {
     position: absolute;
     right: 18px;
     top: 20px;
-
+  
     .btn-trigger-dropdown {
       padding: 0 2px;
       border-radius: 4px;
-
+  
       &:hover {
         background-color: #f6f7f9;
       }
-
+  
       iconpark-icon {
         color: #a7b0bd;
         vertical-align: middle;
       }
     }
   }
+  
 }
 
-.studio-developer-selecter-container {
+.space-developer-selecter-container {
   width: 100%;
   min-height: 90px;
   padding: 8px 11px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.JHOOK_APP_ICON_PICKER_CONTAINER {
-  display: flex;
-
-  .ant-popover-open {
-    display: inline-block;
-  }
 }

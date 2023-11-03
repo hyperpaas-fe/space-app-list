@@ -16,18 +16,19 @@ export function listApps() {
 }
 
 // 列出当前应用下所有的应用管理员
-export function listAppAdmin(appUk, platformRole = "STUDIO_APP_ADMIN") {
-  return validateAppUk(appUk).then(() =>
-    handleRequest(
-      `/account/platform/appRole/query?appUniqueKey=${appUk}&platformRole=${platformRole}`
-    )
+export function listAppAdmin(appUniqueKey, platformRole = "STUDIO_APP_ADMIN") {
+  return validateAppUk(appUniqueKey).then(() =>
+    handleRequest("/account/platform/appRole/query", {
+      appUniqueKey,
+      platformRole,
+    })
   );
 }
 
 // 为应用添加管理员
 export function addAppAdmin(payload = {}) {
   return handleRequest(
-    `/account/platform/role/add`,
+    "/account/platform/role/add",
     { content: payload },
     { method: "post" }
   );
@@ -35,7 +36,7 @@ export function addAppAdmin(payload = {}) {
 
 // 为应用移除管理员
 export function removeAppAdmin(payload = {}) {
-  return handleRequest(`/account/platform/role/remove`, payload, {
+  return handleRequest("/account/platform/role/remove", payload, {
     method: "post",
   });
 }
