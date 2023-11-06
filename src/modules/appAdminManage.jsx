@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { message, Tag } from "antd";
-import { addAppAdmin, removeAppAdmin, listAppAdmin } from "@/services";
+import { message, Modal, Select } from "antd";
 
+import { addAppAdmin, removeAppAdmin, listAppAdmin } from "@/services";
 import modalPersonPicker from "@hp-view/com-person-picker";
+import { MODAL_SIZE_S_WIDTH } from "@/common/const";
 
 function AppAdminManage(props) {
-  const { appUniqueKey } = props || {};
+  const { visible, item, onCancel } = props || {};
+  const { uniqueKey: appUniqueKey } = item || {};
 
   const [developers, setDevelopers] = useState([]);
 
@@ -29,7 +31,6 @@ function AppAdminManage(props) {
 
   const showPersonPicker = () => {
     modalPersonPicker({
-      enabledTypes: ["studioDeveloper"],
       selectedItems: _selectedItems,
       onConfirm: handleAddAppAdmin,
     });
@@ -41,7 +42,7 @@ function AppAdminManage(props) {
     }
 
     const payload = selectedVal.map((item) => ({
-      platformRole: "STUDIO_APP_ADMIN",
+      platformRole: "WS_APP_ADMIN",
       applicationUniqueKey: appUniqueKey,
       accountId: item.itemValue,
     }));
@@ -59,10 +60,14 @@ function AppAdminManage(props) {
     if (!accountId) return;
 
     const payload = {
-      platformRole: "STUDIO_APP_ADMIN",
+      platformRole: "WS_APP_ADMIN",
       applicationUniqueKey: appUniqueKey,
       accountId,
     };
+
+    if (developers.length === 1) {
+      return message.info("至少需要保留一位应用管理员～");
+    }
 
     removeAppAdmin(payload).then((res) => {
       const { content } = res || {};
@@ -78,25 +83,30 @@ function AppAdminManage(props) {
   }, [appUniqueKey]);
 
   return (
-    <div
-      className="space-developer-selecter-container"
-      onClick={showPersonPicker}
+    <Modal
+      visible={visible}
+      title="应用管理"
+      width={MODAL_SIZE_S_WIDTH}
+      okText="确定"
+      cancelText="取消"
+      onCancel={onCancel}
+      onOk={onCancel}
     >
-      {developers.length
-        ? developers.map((item) => {
-            return (
-              <Tag
-                key={item.accountId}
-                style={{ marginBottom: "4px" }}
-                closable
-                onClose={() => handleRemoveAppAdmin(item.accountId)}
-              >
-                {item.accountName}
-              </Tag>
-            );
-          })
-        : null}
-    </div>
+      <p style={{ marginBottom: 8, color: "#000000d9" }}>设置应用管理员</p>
+      {/* !todo 下拉选择框人员多的情况下，移除后面的人不方便,后续自行比较变更人员 */}
+      <Select
+        style={{ width: "100%" }}
+        mode="multiple"
+        open={false}
+        maxTagCount="responsive"
+        value={developers.map((item) => ({
+          value: item.accountId,
+          label: item.accountName,
+        }))}
+        onClick={showPersonPicker}
+        onDeselect={handleRemoveAppAdmin}
+      />
+    </Modal>
   );
 }
 

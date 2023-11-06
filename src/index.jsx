@@ -6,6 +6,7 @@ import { DEF_VIEW_ICON_SCHEMA } from "@/common/const";
 import { listApps } from "@/services/index";
 
 import "@/assets/style/index.less";
+import RenderAppAdminManage from "@/modules/appAdminManage";
 
 const itemLayoutDefs = {
   xs: 24,
@@ -24,6 +25,8 @@ const ignoreApps = [
 export default function Page() {
   const [appList, setAppList] = useState([]);
   const [visibleAuth, setVisibleAuth] = useState(false);
+  const [activeItem, setActiveItem] = useState({});
+  const [visibleAppManage, setVisibleAppManage] = useState(false);
 
   const getAppList = useCallback(() => {
     listApps().then((res) => {
@@ -52,7 +55,7 @@ export default function Page() {
   }, []);
 
   function getMenus(item) {
-    const { uniqueKey } = item || {};
+    const { uniqueKey, permitManage } = item || {};
     const menus = [];
 
     if (visibleAuth) {
@@ -61,7 +64,7 @@ export default function Page() {
         label: (
           <a
             rel="noopener noreferrer"
-            href={`/workspace/auth/app/${uniqueKey}`}
+            href={`/workspace/app/${uniqueKey}/manage/auth`}
             target="_blank"
           >
             应用授权
@@ -69,6 +72,24 @@ export default function Page() {
         ),
       });
     }
+
+    if (permitManage) {
+      // 判断是否允许为当前应用配置管理员
+      menus.push({
+        key: "appManage",
+        label: (
+          <a
+            onClick={() => {
+              setActiveItem(item);
+              setVisibleAppManage(true);
+            }}
+          >
+            应用管理
+          </a>
+        ),
+      });
+    }
+
     return menus;
   }
 
@@ -139,9 +160,12 @@ export default function Page() {
             })}
           </Row>
         </div>
+        <RenderAppAdminManage
+          item={activeItem}
+          visible={visibleAppManage}
+          onCancel={() => setVisibleAppManage(false)}
+        />
       </div>
-
-      {/* <RenderAppAdminManage appUniqueKey={uniqueKey} /> */}
     </>
   );
 }

@@ -16,7 +16,7 @@ export function listApps() {
 }
 
 // 列出当前应用下所有的应用管理员
-export function listAppAdmin(appUniqueKey, platformRole = "STUDIO_APP_ADMIN") {
+export function listAppAdmin(appUniqueKey, platformRole = "WS_APP_ADMIN") {
   return validateAppUk(appUniqueKey).then(() =>
     handleRequest("/account/platform/appRole/query", {
       appUniqueKey,
