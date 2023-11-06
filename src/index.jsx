@@ -1,7 +1,6 @@
 import { Col, Dropdown, Menu, message, Row, Space } from "antd";
 import { useCallback, useLayoutEffect, useState } from "react";
 import FitIcon from "@hp-view/fit-icon";
-import callAction from "@hyperpaas/hyper-sdk";
 import { DEF_VIEW_ICON_SCHEMA } from "@/common/const";
 import { listApps } from "@/services/index";
 
@@ -24,7 +23,6 @@ const ignoreApps = [
 
 export default function Page() {
   const [appList, setAppList] = useState([]);
-  const [visibleAuth, setVisibleAuth] = useState(false);
   const [activeItem, setActiveItem] = useState({});
   const [visibleAppManage, setVisibleAppManage] = useState(false);
 
@@ -58,7 +56,7 @@ export default function Page() {
     const { uniqueKey, permitManage } = item || {};
     const menus = [];
 
-    if (visibleAuth) {
+    if (permitManage) {
       menus.push({
         key: "auth",
         label: (
@@ -71,9 +69,7 @@ export default function Page() {
           </a>
         ),
       });
-    }
 
-    if (permitManage) {
       // 判断是否允许为当前应用配置管理员
       menus.push({
         key: "appManage",
@@ -95,17 +91,6 @@ export default function Page() {
 
   useLayoutEffect(function () {
     getAppList();
-    callAction("GET_USER_INFO").then((userInfo) => {
-      const { privileges } = userInfo || {};
-      // 暂时以管理员权限判定
-      const status = callAction("CAN_ACTIVATE", [
-        privileges,
-        ["WS_FIRST_APP_MANAGE"],
-      ]);
-      // const status = Array.isArray(privileges) && privileges.includes('WS_FIRST_APP_MANAGE');
-
-      status && setVisibleAuth(status);
-    });
   }, []);
 
   return (
