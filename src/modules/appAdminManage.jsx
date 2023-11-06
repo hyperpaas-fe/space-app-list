@@ -91,11 +91,12 @@ function AppAdminManage(props) {
       cancelText="取消"
       onCancel={onCancel}
       onOk={onCancel}
+      footer={null}
     >
       <p style={{ marginBottom: 8, color: "#000000d9" }}>设置应用管理员</p>
       {/* !todo 下拉选择框人员多的情况下，移除后面的人不方便,后续自行比较变更人员 */}
       <Select
-        style={{ width: "100%" }}
+        style={{ width: "100%", marginBottom: 40 }}
         mode="multiple"
         open={false}
         maxTagCount="responsive"
