@@ -32,7 +32,8 @@ export default function Page() {
       if (!content) {
         return message.error("获取应用列表失败");
       }
-      const _appList = content.map((row) => {
+      const list = [];
+      content.forEach((row) => {
         const { uniqueKey, appIcon = {} } = row || {};
         if (ignoreApps.includes(uniqueKey)) {
           return false;
@@ -41,14 +42,13 @@ export default function Page() {
           ...DEF_VIEW_ICON_SCHEMA,
           ...appIcon,
         };
-        return {
+        list.push({
           ...row,
           iconProps,
           appUrl: `/workspace/app/${uniqueKey}`,
-        };
+        });
       });
-
-      setAppList(_appList);
+      setAppList(list);
     });
   }, []);
 
