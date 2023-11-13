@@ -29,9 +29,6 @@ export default function Page() {
   const getAppList = useCallback(() => {
     listApps().then((res) => {
       const { content } = res || {};
-      if (!content) {
-        return message.error("获取应用列表失败");
-      }
       const _appList = content.map((row) => {
         const { uniqueKey, appIcon = {} } = row || {};
         if (ignoreApps.includes(uniqueKey)) {
