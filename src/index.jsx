@@ -30,21 +30,22 @@ export default function Page() {
     listApps().then((res) => {
       const { content } = res || {};
       const list = [];
-      content.forEach((row) => {
-        const { uniqueKey, appIcon = {} } = row || {};
-        if (ignoreApps.includes(uniqueKey)) {
-          return false;
-        }
-        const iconProps = {
-          ...DEF_VIEW_ICON_SCHEMA,
-          ...appIcon,
-        };
-        list.push({
-          ...row,
-          iconProps,
-          appUrl: `/workspace/app/${uniqueKey}`,
+      content &&
+        content.forEach((row) => {
+          const { uniqueKey, appIcon = {} } = row || {};
+          if (ignoreApps.includes(uniqueKey)) {
+            return false;
+          }
+          const iconProps = {
+            ...DEF_VIEW_ICON_SCHEMA,
+            ...appIcon,
+          };
+          list.push({
+            ...row,
+            iconProps,
+            appUrl: `/workspace/app/${uniqueKey}`,
+          });
         });
-      });
       setAppList(list);
     });
   }, []);
