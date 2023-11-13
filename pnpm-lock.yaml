@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@hp-view/com-person-picker':
-    specifier: ^0.2.2
-    version: 0.2.2
+    specifier: ^0.2.6
+    version: 0.2.6
   '@hp-view/fit-icon':
     specifier: ^0.1.1
     version: 0.1.1
@@ -393,8 +393,8 @@ packages:
     dev: true
     optional: true
 
-  /@hp-view/com-person-picker@0.2.2:
-    resolution: {integrity: sha512-l8XjSQ81OQxFGVIrQHrGsQ7DQ9ugfFyZMT8WA75Uj4YXPsNC6jj+CL2hYbIML9is5dlLGCGmj6FAcQP8wzz2/Q==}
+  /@hp-view/com-person-picker@0.2.6:
+    resolution: {integrity: sha512-/gWtXI9/SHA851ur8UbQMdvQhExQaln+wA4DxTYWPsqpB0O67Q+gAXfhklWhoaYk1JFq7MIyTafOaGvCvASahA==}
     dependencies:
       '@hp-view/request': 0.2.7
       '@hp-view/theme': 1.0.2

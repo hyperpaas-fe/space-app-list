@@ -22,6 +22,14 @@ function AppAdminManage(props) {
       });
   };
 
+  const _limitItems =
+    (developers &&
+      developers.map((item) => ({
+        id: item.accountId,
+        disabled: true,
+      }))) ||
+    [];
+
   const _selectedItems = Array.isArray(developers)
     ? developers.map((item) => ({
         value: item.accountId,
@@ -31,6 +39,7 @@ function AppAdminManage(props) {
 
   const showPersonPicker = () => {
     modalPersonPicker({
+      limitItems: _limitItems,
       selectedItems: _selectedItems,
       onConfirm: handleAddAppAdmin,
     });
@@ -94,12 +103,11 @@ function AppAdminManage(props) {
       footer={null}
     >
       <p style={{ marginBottom: 8, color: "#000000d9" }}>设置应用管理员</p>
-      {/* !todo 下拉选择框人员多的情况下，移除后面的人不方便,后续自行比较变更人员 */}
       <Select
         style={{ width: "100%", marginBottom: 40 }}
         mode="multiple"
         open={false}
-        maxTagCount="responsive"
+        // maxTagCount="responsive"
         value={developers.map((item) => ({
           value: item.accountId,
           label: item.accountName,
