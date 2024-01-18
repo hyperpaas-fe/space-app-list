@@ -1,11 +1,14 @@
-import { Col, Dropdown, Menu, message, Row, Space } from "antd";
+import { Col, Dropdown, Menu, Row, Space } from "antd";
 import { useCallback, useLayoutEffect, useState } from "react";
+import { More } from "@icon-park/react";
+
 import FitIcon from "@hp-view/fit-icon";
+
 import { DEF_VIEW_ICON_SCHEMA } from "@/common/const";
 import { listApps } from "@/services/index";
 
-import "@/assets/style/index.less";
 import RenderAppAdminManage from "@/modules/appAdminManage";
+import "@/assets/style/index.less";
 
 const itemLayoutDefs = {
   xs: 24,
@@ -106,14 +109,9 @@ export default function Page() {
                       overlay={<Menu items={menus} />}
                       style={{ float: "right" }}
                     >
-                      <Space>
-                        <a
-                          className="btn-trigger-dropdown"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <iconpark-icon name="more" size="20"></iconpark-icon>
-                        </a>
-                      </Space>
+                      <div className="trigger-icon-wrapper">
+                        <More className="dropdown-trigger-icon" size={20} />
+                      </div>
                     </Dropdown>
                   </div>
                 ) : null;
@@ -125,17 +123,20 @@ export default function Page() {
                   {...itemLayoutDefs}
                 >
                   <div className="clearfix applist-item">
-                    <div className="applist-item-icon">
-                      <FitIcon {...iconProps} />
-                    </div>
-                    <div className="applist-item-info">
-                      <h3 className="info-appname">
-                        <a href={appUrl} target="_blank">
-                          {label}
-                        </a>
-                      </h3>
-                      <p className="info-desc">{description}</p>
-                    </div>
+                    <a
+                      style={{ display: "flex" }}
+                      href={appUrl}
+                      target="_blank"
+                    >
+                      <div className="applist-item-icon">
+                        <FitIcon {...iconProps} />
+                      </div>
+                      <div className="applist-item-info">
+                        <h3 className="info-appname">{label}</h3>
+                        <p className="info-desc">{description}</p>
+                      </div>
+                    </a>
+
                     {dropdownView}
                   </div>
                 </Col>
