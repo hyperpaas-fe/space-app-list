@@ -1,4 +1,4 @@
-import { Col, Dropdown, Menu, Row, Space } from "antd";
+import { Col, Dropdown, Menu, Row } from "antd";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { More } from "@icon-park/react";
 
@@ -17,13 +17,6 @@ const itemLayoutDefs = {
   lg: 6,
 };
 
-// 忽略新日APP
-const ignoreApps = [
-  "abf26cc8c77849dfa8a108e03c44e4ee",
-  "7871f37a9eb1438fb89baecfe8ed96ee",
-  "020c4d385f5f472086ddc9ffa6e33264",
-];
-
 export default function Page() {
   const [appList, setAppList] = useState([]);
   const [activeItem, setActiveItem] = useState({});
@@ -33,10 +26,11 @@ export default function Page() {
     listApps().then((res) => {
       const { content } = res || {};
       const list = [];
+      const blockedApps = window._HYPERPAAS_BLOCKED_APPS || [];
       content &&
         content.forEach((row) => {
           const { uniqueKey, appIcon = {} } = row || {};
-          if (ignoreApps.includes(uniqueKey)) {
+          if (blockedApps.includes(uniqueKey)) {
             return false;
           }
           const iconProps = {
