@@ -4,10 +4,15 @@ import { More } from "@icon-park/react";
 
 import FitIcon from "@hp-view/fit-icon";
 
-import { DEF_VIEW_ICON_SCHEMA } from "@/common/const";
+import {
+  DEF_VIEW_ICON_SCHEMA,
+  HEYPER_PREVIEW_MODE,
+  HYPER_PREVIEW_MODE_URL_QS,
+} from "@/common/const";
 import { listApps } from "@/services/index";
 
 import RenderAppAdminManage from "@/modules/appAdminManage";
+
 import "@/assets/style/index.less";
 
 const itemLayoutDefs = {
@@ -17,10 +22,20 @@ const itemLayoutDefs = {
   lg: 6,
 };
 
+function getPreviewModeUrl(urlStr) {
+  if (!urlStr) {
+    return null;
+  }
+  let joinStr = /\?/.test(urlStr) ? "&" : "?";
+  return urlStr + joinStr + HYPER_PREVIEW_MODE_URL_QS;
+}
+
 export default function Page() {
   const [appList, setAppList] = useState([]);
   const [activeItem, setActiveItem] = useState({});
   const [visibleAppManage, setVisibleAppManage] = useState(false);
+
+  const isPreviewMode = !!window[HEYPER_PREVIEW_MODE];
 
   const getAppList = useCallback(() => {
     listApps().then((res) => {
@@ -37,10 +52,14 @@ export default function Page() {
             ...DEF_VIEW_ICON_SCHEMA,
             ...appIcon,
           };
+
+          const _appUrl = `/workspace/app/${uniqueKey}`;
+          const appUrl = isPreviewMode ? getPreviewModeUrl(_appUrl) : _appUrl;
+
           list.push({
             ...row,
             iconProps,
-            appUrl: `/workspace/app/${uniqueKey}`,
+            appUrl,
           });
         });
       setAppList(list);
@@ -138,6 +157,7 @@ export default function Page() {
             })}
           </Row>
         </div>
+
         <RenderAppAdminManage
           item={activeItem}
           visible={visibleAppManage}

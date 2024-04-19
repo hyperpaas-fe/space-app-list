@@ -29,3 +29,8 @@ export const DEF_VIEW_ICON_SCHEMA = {
   width: 64,
   borderRadius: 12,
 };
+
+// workspace预览标记
+export const HEYPER_PREVIEW_MODE = "_HEYPER_PREVIEW_MODE_STATUS_";
+
+export const HYPER_PREVIEW_MODE_URL_QS = "_preview_mode=1";
