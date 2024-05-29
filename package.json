@@ -1,6 +1,6 @@
 {
   "name": "@hyperpaas/space-app-list",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "type": "module",
   "main": "./dist/index.es.js",
   "scripts": {
