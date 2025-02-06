@@ -31,7 +31,8 @@ export default defineConfig({
         "antd",
         "@hp-view/request",
         "@hp-view/theme",
-        "@icon-park/react"
+        "@icon-park/react",
+        /@hyperpaas\/hyper-biz-controller/,
       ],
       output: {
         globals: {

@@ -1,6 +1,7 @@
-import handleRequest from "@hp-view/request";
-
-import { validateValueRequired } from "./helpers";
+import {
+  handleRequest,
+  validateValueRequired,
+} from "@hyperpaas/hyper-biz-controller/services";
 
 function validateAppId(appId) {
   return validateValueRequired(appId, "appId is required!");

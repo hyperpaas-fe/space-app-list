@@ -22,6 +22,9 @@ const itemLayoutDefs = {
   lg: 6,
 };
 
+const CDN_ORIGIN = "https://assets.hyperpaas.com";
+const CDN_TARGET = "https://cdn-assets.hyperpaas.com";
+
 function getPreviewModeUrl(urlStr) {
   if (!urlStr) {
     return null;
@@ -51,6 +54,7 @@ export default function Page() {
           const iconProps = {
             ...DEF_VIEW_ICON_SCHEMA,
             ...appIcon,
+            iconTexture: appIcon?.iconTexture?.replace(CDN_ORIGIN, CDN_TARGET), // 处理成统一cdn地址
           };
 
           const _appUrl = `/workspace/app/${uniqueKey}`;
